@@ -25,7 +25,7 @@
                     android:id="@+id/iv_child_item"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitXY"
                     android:src="@drawable/pi2"></ImageView>
             </androidx.cardview.widget.CardView>
 

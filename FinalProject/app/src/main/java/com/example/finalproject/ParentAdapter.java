@@ -50,6 +50,7 @@ public class ParentAdapter extends RecyclerView.Adapter<ParentAdapter.ViewHolder
         public ViewHolder(@NonNull View itemView){
             super(itemView);
             rv_child=itemView.findViewById(R.id.rv_child);
+
             tv_parent_title =itemView.findViewById(R.id.textView_book);
         }
     }
