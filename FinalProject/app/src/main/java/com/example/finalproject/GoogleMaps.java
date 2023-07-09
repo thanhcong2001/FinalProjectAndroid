@@ -30,18 +30,22 @@ public class GoogleMaps extends AppCompatActivity implements OnMapReadyCallback 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         nav= findViewById(R.id.nav_bar);
-        nav.setSelectedItemId(R.id.book);
+        nav.setSelectedItemId(R.id.setting);
         nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.home) {
-                    startActivity(new Intent(GoogleMaps.this, MainPage.class));
-                    return true;
-                }
-                return false;
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            if (item.getItemId() == R.id.home) {
+                startActivity(new Intent(GoogleMaps.this, MainPage.class));
+                return true;
             }
-        });
-    }
+            else if (item.getItemId()==R.id.setting){
+                startActivity(new Intent(GoogleMaps.this, Setting.class));
+                return true;
+            }
+            return false;
+        }
+    });
+}
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {

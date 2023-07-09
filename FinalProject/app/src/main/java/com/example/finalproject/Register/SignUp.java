@@ -57,14 +57,14 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
                     if (response.body() != null) {
-                        Toast.makeText(SignUp.this, "Save successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUp.this, "Save Fail", Toast.LENGTH_SHORT).show();
                     }
                 }
                 @Override
                 public void onFailure(Call<User> call, Throwable t) {
                     Intent intentSignUp = new Intent(SignUp.this, LoginPage.class);
                     startActivity(intentSignUp);
-                    Toast.makeText(SignUp.this, "Save Successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUp.this, "Save successfully", Toast.LENGTH_SHORT).show();
                 }
             });
         } catch (Exception e) {
