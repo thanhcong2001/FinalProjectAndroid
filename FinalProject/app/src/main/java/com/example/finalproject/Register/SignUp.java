@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -34,6 +35,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         btn = findViewById(R.id.button);
         btn.setOnClickListener(this);
         traineeService = UserRepository.getUserService();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
     @Override
@@ -54,14 +57,14 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
                     if (response.body() != null) {
-                        Toast.makeText(SignUp.this, "Save successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUp.this, "Save Fail", Toast.LENGTH_SHORT).show();
                     }
                 }
                 @Override
                 public void onFailure(Call<User> call, Throwable t) {
                     Intent intentSignUp = new Intent(SignUp.this, LoginPage.class);
                     startActivity(intentSignUp);
-                    Toast.makeText(SignUp.this, "Save Successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUp.this, "Save successfully", Toast.LENGTH_SHORT).show();
                 }
             });
         } catch (Exception e) {
