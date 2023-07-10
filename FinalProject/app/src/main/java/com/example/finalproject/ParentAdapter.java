@@ -11,32 +11,38 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ParentAdapter extends RecyclerView.Adapter<ParentAdapter.ViewHolder> {
-    List<ParentModelClass> parentModelClassList;
-    Context context;
+    private List<ParentModelClass> parentModelClassList;
+    private List<ParentModelClass> originalParentModelClassList; // Store the original list for filtering
+    private Context context;
+
 
     public ParentAdapter(List<ParentModelClass> parentModelClassList, Context context) {
         this.parentModelClassList = parentModelClassList;
+        this.originalParentModelClassList = new ArrayList<>(parentModelClassList);
         this.context = context;
     }
 
     @NonNull
     @Override
-    public ParentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_book,null,false);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.item_book, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ParentAdapter.ViewHolder holder, int position) {
-        holder.tv_parent_title.setText(parentModelClassList.get(position).title);
-        ChildAdapter childAdapter;
-        childAdapter = new ChildAdapter(parentModelClassList.get(position).childModelClassList,context);
-        holder.rv_child.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        ParentModelClass parentModel = parentModelClassList.get(position);
+        holder.tv_parent_title.setText(parentModel.getTitle());
+
+        ChildAdapter childAdapter = new ChildAdapter(parentModel.getChildModelClassList(), context);
+        holder.rv_child.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         holder.rv_child.setAdapter(childAdapter);
         childAdapter.notifyDataSetChanged();
+
     }
 
     @Override
@@ -47,10 +53,17 @@ public class ParentAdapter extends RecyclerView.Adapter<ParentAdapter.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder {
         RecyclerView rv_child;
         TextView tv_parent_title;
-        public ViewHolder(@NonNull View itemView){
+        TextView tv_see_more;
+
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            rv_child=itemView.findViewById(R.id.rv_child);
-            tv_parent_title =itemView.findViewById(R.id.textView_book);
+            rv_child = itemView.findViewById(R.id.rv_child);
+            tv_parent_title = itemView.findViewById(R.id.textView_book);
+            tv_see_more = itemView.findViewById(R.id.textView_book1);
         }
     }
+
 }
+
+
+

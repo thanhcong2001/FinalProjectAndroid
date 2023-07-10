@@ -10,4 +10,14 @@ public class ParentModelClass {
         this.title = title;
         this.childModelClassList = childModelClassList;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public List<ChildModelClass> getChildModelClassList() {
+        return childModelClassList;
+    }
+
+
 }
