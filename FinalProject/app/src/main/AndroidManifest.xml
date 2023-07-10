@@ -19,6 +19,8 @@
         android:theme="@style/Theme.FinalProject"
         tools:targetApi="31">
         <activity
+            android:name=".CartActivity" />
+        <activity
             android:name=".GoogleMaps"
             android:exported="false" />
         <activity
