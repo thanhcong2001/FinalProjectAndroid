@@ -30,7 +30,6 @@ import retrofit2.Response;
 
 public class MainPage extends AppCompatActivity implements View.OnClickListener {
      RecyclerView recyclerView;
-    TextView tv_seeMore;
      GridLayoutManager gridLayoutManager;
      User user;
 
@@ -56,7 +55,6 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
         setContentView(R.layout.activity_main_page);
         userService = UserRepository.getUserService();
         recyclerView =findViewById(R.id.rcv_book);
-
         childModelClassArrayList = new ArrayList<>();
         favoriteList= new ArrayList<>();
         recentlyWatchedList= new ArrayList<>();
@@ -92,7 +90,6 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         GetAll();
-
     }
 
     @Override

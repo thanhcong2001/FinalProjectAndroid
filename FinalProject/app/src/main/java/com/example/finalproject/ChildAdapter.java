@@ -3,10 +3,12 @@ package com.example.finalproject;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -45,6 +47,12 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.ViewHolder> 
                 .load(childModelClassList.get(position).getImage_URL())
                 .diskCacheStrategy(DiskCacheStrategy.ALL) // Lưu cache ảnh
                 .into(holder.iv_child_image);
+        holder.rlt_book.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickItem(childModelClassList.get(position).getBook_Id());
+            }
+        });
     }
 
     @Override
@@ -53,6 +61,7 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        RelativeLayout rlt_book;
         ImageView iv_child_image;
         TextView nameBook,nameAuthor;
 
@@ -61,7 +70,15 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.ViewHolder> 
             iv_child_image = itemView.findViewById(R.id.iv_child_item);
             nameBook = itemView.findViewById(R.id.nameBook);
             nameAuthor = itemView.findViewById(R.id.nameAuthor);
-
+            rlt_book = itemView.findViewById(R.id.rlt_layoutBook);
         }
+    }
+
+    public void onClickItem(String book_Id){
+        Intent intent = new Intent(context,BookDetail.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("book_Id",book_Id);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
     }
 }

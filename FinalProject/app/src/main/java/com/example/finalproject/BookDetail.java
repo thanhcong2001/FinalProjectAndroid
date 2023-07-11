@@ -38,15 +38,14 @@ public class BookDetail extends AppCompatActivity  {
         authorName = findViewById(R.id.tvAuthor);
         price = findViewById(R.id.tvPrice);
         detail = findViewById(R.id.tvDetail);
-        String bookId = "e2f50c0c-b2f6-41de-830b-07b70d014e01";
-        userService.getBookDetail(bookId).enqueue(new Callback<BookRecycleView>() {
+        Bundle bundle = getIntent().getExtras();
+        String book_Id = (String)bundle.get("book_Id");
+        userService.getBookDetail(book_Id).enqueue(new Callback<BookRecycleView>() {
             @Override
             public void onResponse(Call<BookRecycleView> call, Response<BookRecycleView> response) {
                 book = response.body();
-
                 if(book != null){
                     Glide.with(BookDetail.this).load(book.getImage_URL()).into(imageView);
-                    //imageView.setImageURI(Uri.parse(book.getImage_URL()));
                     bookTitle.setText(book.getBook_Title());
                     authorName.setText(book.getBook_Author());
                     price.setText(book.getBook_Price());
