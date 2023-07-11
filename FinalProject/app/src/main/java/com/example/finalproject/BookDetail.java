@@ -38,9 +38,17 @@ public class BookDetail extends AppCompatActivity  {
         authorName = findViewById(R.id.tvAuthor);
         price = findViewById(R.id.tvPrice);
         detail = findViewById(R.id.tvDetail);
+        button = findViewById(R.id.btnAddToCart);
         Bundle bundle = getIntent().getExtras();
-        String book_Id = (String)bundle.get("book_Id");
-        userService.getBookDetail(book_Id).enqueue(new Callback<BookRecycleView>() {
+        book = (BookRecycleView) bundle.get("bookObject");
+        if(book != null){
+            Glide.with(BookDetail.this).load(book.getImage_URL()).into(imageView);
+            bookTitle.setText(book.getBook_Title());
+            authorName.setText(book.getBook_Author());
+            price.setText(String.valueOf(book.getBook_Price()));
+            detail.setText(book.getBook_Description());
+        }
+        /*userService.getBookDetail(book_Id).enqueue(new Callback<BookRecycleView>() {
             @Override
             public void onResponse(Call<BookRecycleView> call, Response<BookRecycleView> response) {
                 book = response.body();
@@ -56,7 +64,7 @@ public class BookDetail extends AppCompatActivity  {
             public void onFailure(Call<BookRecycleView> call, Throwable t) {
                 Toast.makeText(BookDetail.this,"Error!",Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
     }
 }

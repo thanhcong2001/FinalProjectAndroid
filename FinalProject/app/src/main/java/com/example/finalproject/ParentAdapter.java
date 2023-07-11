@@ -35,7 +35,7 @@ public class ParentAdapter extends RecyclerView.Adapter<ParentAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ParentAdapter.ViewHolder holder, int position) {
         holder.tv_parent_title.setText(parentModelClassList.get(position).title);
         ChildAdapter childAdapter;
-        childAdapter = new ChildAdapter(parentModelClassList.get(position).childModelClassList,context);
+        childAdapter = new ChildAdapter(parentModelClassList.get(position).childList,context);
         holder.rv_child.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
         holder.rv_child.setAdapter(childAdapter);
         childAdapter.notifyDataSetChanged();

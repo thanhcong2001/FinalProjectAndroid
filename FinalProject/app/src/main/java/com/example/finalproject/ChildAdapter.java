@@ -1,8 +1,8 @@
 package com.example.finalproject;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,9 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
-
-import java.net.URI;
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -24,11 +22,11 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.ViewHolder> {
-    List<ChildModelClass> childModelClassList;
+    List<BookRecycleView> childList;
     Context context;
 
-    public ChildAdapter(List<ChildModelClass> childModelClassList, Context context) {
-        this.childModelClassList = childModelClassList;
+    public ChildAdapter(List<BookRecycleView> childList, Context context) {
+        this.childList = childList;
         this.context = context;
     }
 
@@ -40,24 +38,24 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ChildAdapter.ViewHolder holder, int position) {
-        holder.nameBook.setText(childModelClassList.get(position).getBook_Title());
-        holder.nameAuthor.setText(childModelClassList.get(position).getBook_Author());
+    public void onBindViewHolder(@NonNull ChildAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        holder.nameBook.setText(childList.get(position).getBook_Title());
+        holder.nameAuthor.setText(childList.get(position).getBook_Author());
         Glide.with(context)
-                .load(childModelClassList.get(position).getImage_URL())
+                .load(childList.get(position).getImage_URL())
                 .diskCacheStrategy(DiskCacheStrategy.ALL) // Lưu cache ảnh
                 .into(holder.iv_child_image);
         holder.rlt_book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickItem(childModelClassList.get(position).getBook_Id());
+                onClickItem(childList.get(position));
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return childModelClassList.size();
+        return childList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -74,10 +72,10 @@ public class ChildAdapter extends RecyclerView.Adapter<ChildAdapter.ViewHolder> 
         }
     }
 
-    public void onClickItem(String book_Id){
+    public void onClickItem(BookRecycleView book){
         Intent intent = new Intent(context,BookDetail.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("book_Id",book_Id);
+        bundle.putSerializable("bookObject", book);
         intent.putExtras(bundle);
         context.startActivity(intent);
     }
