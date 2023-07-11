@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import retrofit2.Response;
 
 public class MainPage extends AppCompatActivity implements View.OnClickListener {
      RecyclerView recyclerView;
+    TextView tv_seeMore;
      GridLayoutManager gridLayoutManager;
      User user;
 
@@ -47,12 +49,14 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
 
     List<BookRecycleView> listBook;
     BottomNavigationView nav;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
         userService = UserRepository.getUserService();
         recyclerView =findViewById(R.id.rcv_book);
+
         childModelClassArrayList = new ArrayList<>();
         favoriteList= new ArrayList<>();
         recentlyWatchedList= new ArrayList<>();
@@ -93,8 +97,7 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(MainPage.this,BookDetail.class);
-        startActivity(intent);
+
     }
     public void GetAll(){
         Call<BookRecycleView[]> call = (Call<BookRecycleView[]>) userService.getAllBook();
@@ -108,22 +111,22 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
                 for (BookRecycleView book : books) {
                         switch (book.getCategory_Id()) {
                             case "1":
-                                latesList.add(new ChildModelClass(book.getImage_URL(), book.getBook_Title(), book.getBook_Author()));
+                                latesList.add(new ChildModelClass(book.getBook_Id(), book.getImage_URL(), book.getBook_Title(), book.getBook_Author()));
                                 break;
                             case "2":
-                                comicList.add(new ChildModelClass(book.getImage_URL(), book.getBook_Title(), book.getBook_Author()));
+                                comicList.add(new ChildModelClass(book.getBook_Id(), book.getImage_URL(), book.getBook_Title(), book.getBook_Author()));
                                 break;
                             case "3":
-                                favoriteList.add(new ChildModelClass(book.getImage_URL(), book.getBook_Title(), book.getBook_Author()));
+                                favoriteList.add(new ChildModelClass(book.getBook_Id(), book.getImage_URL(), book.getBook_Title(), book.getBook_Author()));
                                 break;
                             case "4":
-                                mysteryList.add(new ChildModelClass(book.getImage_URL(), book.getBook_Title(), book.getBook_Author()));
+                                mysteryList.add(new ChildModelClass(book.getBook_Id(), book.getImage_URL(), book.getBook_Title(), book.getBook_Author()));
                                 break;
                             case "5":
-                                recentlyWatchedList.add(new ChildModelClass(book.getImage_URL(), book.getBook_Title(), book.getBook_Author()));
+                                recentlyWatchedList.add(new ChildModelClass(book.getBook_Id(), book.getImage_URL(), book.getBook_Title(), book.getBook_Author()));
                                 break;
                             case "6":
-                                horrorList.add(new ChildModelClass(book.getImage_URL(), book.getBook_Title(), book.getBook_Author()));
+                                horrorList.add(new ChildModelClass(book.getBook_Id(), book.getImage_URL(), book.getBook_Title(), book.getBook_Author()));
                                 break;
                         }
                     }

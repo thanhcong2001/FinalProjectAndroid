@@ -14,7 +14,7 @@
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="9dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/btn_addToCart"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddToCart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.478"
         app:layout_constraintStart_toStartOf="parent"

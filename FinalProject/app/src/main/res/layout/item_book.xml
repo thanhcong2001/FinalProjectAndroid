@@ -22,7 +22,7 @@
                 android:paddingLeft="10dp"
                 android:textStyle="bold"/>
             <TextView
-                android:id="@+id/textView_book1"
+                android:id="@+id/tvSeeMore"
                 android:layout_marginStart="100dp"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
