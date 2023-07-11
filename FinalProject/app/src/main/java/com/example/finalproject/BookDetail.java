@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.car.ui.toolbar.TabLayout;
 import com.bumptech.glide.Glide;
 import com.example.finalproject.Register.UserRepository;
 import com.example.finalproject.api.UserService;
@@ -22,7 +23,7 @@ import retrofit2.Response;
 
 public class BookDetail extends AppCompatActivity  {
     ImageView imageView;
-    TextView bookTitle,authorName,price,detail;
+    TextView bookTitle,authorName,price,publicYear,type,description;
     Button button;
     BookRecycleView book;
 
@@ -37,7 +38,9 @@ public class BookDetail extends AppCompatActivity  {
         bookTitle = findViewById(R.id.tvBookTitle);
         authorName = findViewById(R.id.tvAuthor);
         price = findViewById(R.id.tvPrice);
-        detail = findViewById(R.id.tvDetail);
+        publicYear = findViewById(R.id.tvPublicYear);
+        type = findViewById(R.id.tvBookType);
+        description = findViewById(R.id.tvDetail);
         button = findViewById(R.id.btnAddToCart);
         Bundle bundle = getIntent().getExtras();
         book = (BookRecycleView) bundle.get("bookObject");
@@ -46,25 +49,9 @@ public class BookDetail extends AppCompatActivity  {
             bookTitle.setText(book.getBook_Title());
             authorName.setText(book.getBook_Author());
             price.setText(String.valueOf(book.getBook_Price()));
-            detail.setText(book.getBook_Description());
+            publicYear.setText(String.valueOf(book.getBook_Year_Public()));
+            type.setText(book.getCategory_Name());
+            description.setText(book.getBook_Description());
         }
-        /*userService.getBookDetail(book_Id).enqueue(new Callback<BookRecycleView>() {
-            @Override
-            public void onResponse(Call<BookRecycleView> call, Response<BookRecycleView> response) {
-                book = response.body();
-                if(book != null){
-                    Glide.with(BookDetail.this).load(book.getImage_URL()).into(imageView);
-                    bookTitle.setText(book.getBook_Title());
-                    authorName.setText(book.getBook_Author());
-                    price.setText(book.getBook_Price());
-                    detail.setText(book.getBook_Description());
-                }
-            }
-            @Override
-            public void onFailure(Call<BookRecycleView> call, Throwable t) {
-                Toast.makeText(BookDetail.this,"Error!",Toast.LENGTH_SHORT).show();
-            }
-        });*/
-
     }
 }

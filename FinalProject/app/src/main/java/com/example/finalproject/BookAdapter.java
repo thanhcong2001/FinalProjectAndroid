@@ -1,10 +1,14 @@
 package com.example.finalproject;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,19 +17,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder>{
     private Context context;
-    private ArrayList<ChildModelClass> bookList;
+    private ArrayList<BookRecycleView> bookList;
 
     public BookAdapter(Context context) {
         this.context = context;
     }
 
-    public void setData(ArrayList<ChildModelClass> bookList){
+    public void setData(ArrayList<BookRecycleView> bookList){
         this.bookList = bookList;
         notifyDataSetChanged();
     }
@@ -38,13 +40,19 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull BookViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.nameBook.setText(bookList.get(position).getBook_Title());
         holder.nameAuthor.setText(bookList.get(position).getBook_Author());
         Glide.with(context)
                 .load(bookList.get(position).getImage_URL())
                 .diskCacheStrategy(DiskCacheStrategy.ALL) // Lưu cache ảnh
                 .into(holder.iv_child_image);
+        holder.rlt_book.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickItem(bookList.get(position));
+            }
+        });
     }
 
     @Override
@@ -53,6 +61,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     }
 
     public class BookViewHolder extends RecyclerView.ViewHolder{
+        private RelativeLayout rlt_book;
         private ImageView iv_child_image;
         private TextView nameBook,nameAuthor;
         public BookViewHolder(@NonNull View itemView) {
@@ -60,6 +69,14 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             iv_child_image = itemView.findViewById(R.id.iv_child_item);
             nameBook = itemView.findViewById(R.id.nameBook);
             nameAuthor = itemView.findViewById(R.id.nameAuthor);
+            rlt_book = itemView.findViewById(R.id.rlt_layoutBook);
         }
+    }
+    public void onClickItem(BookRecycleView book){
+        Intent intent = new Intent(context,BookDetail.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("bookObject", book);
+        intent.putExtras(bundle);
+        context.startActivity(intent);
     }
 }

@@ -10,7 +10,6 @@ import com.example.finalproject.Register.UserRepository;
 import com.example.finalproject.api.UserService;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -18,7 +17,7 @@ import retrofit2.Response;
 
 public class SeeMorePage extends AppCompatActivity {
     UserService userService;
-    ArrayList<ChildModelClass> bookList = new ArrayList<>();
+    ArrayList<BookRecycleView> bookList = new ArrayList<BookRecycleView>();
     private RecyclerView recyclerView;
     private BookAdapter bookAdapter;
     @Override
@@ -36,7 +35,7 @@ public class SeeMorePage extends AppCompatActivity {
 
                 BookRecycleView[] books = response.body();
                 for(BookRecycleView book : books){
-                    bookList.add(new ChildModelClass(book.getBook_Id(),book.getImage_URL(),book.getBook_Title(),book.getBook_Author()));
+                    bookList.add(book);
                 }
                 bookAdapter.setData(bookList);
                 recyclerView.setAdapter(bookAdapter);
