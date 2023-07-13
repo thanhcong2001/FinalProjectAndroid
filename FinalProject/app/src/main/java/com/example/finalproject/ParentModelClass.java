@@ -4,10 +4,10 @@ import java.util.List;
 
 public class ParentModelClass {
     String title;
-    List<ChildModelClass>childModelClassList;
+    List<BookRecycleView> childList;
 
-    public ParentModelClass(String title, List<ChildModelClass> childModelClassList) {
+    public ParentModelClass(String title, List<BookRecycleView> childList) {
         this.title = title;
-        this.childModelClassList = childModelClassList;
+        this.childList = childList;
     }
 }

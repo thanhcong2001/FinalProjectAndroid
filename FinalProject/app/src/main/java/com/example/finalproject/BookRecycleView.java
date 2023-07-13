@@ -1,7 +1,8 @@
 package com.example.finalproject;
 
+import java.io.Serializable;
 
-public class BookRecycleView {
+public class BookRecycleView implements Serializable {
     private String book_Id;
     private String request_Id;
     private String category_Id;

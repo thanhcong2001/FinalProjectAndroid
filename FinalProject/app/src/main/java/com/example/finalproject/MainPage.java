@@ -1,30 +1,27 @@
 package com.example.finalproject;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
+import java.util.List;
 
-
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.TextView;
+import javax.security.auth.callback.Callback;
+import javax.swing.text.View;
 
 import com.example.finalproject.Register.User;
 import com.example.finalproject.Register.UserRepository;
 import com.example.finalproject.api.UserService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.WindowManager;
+import android.widget.TextView;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainPage extends AppCompatActivity implements View.OnClickListener {
@@ -34,19 +31,20 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
 
     ArrayList<ParentModelClass> parentModelClassArrayList;
     ArrayList<ChildModelClass> childModelClassArrayList;
-    ArrayList<ChildModelClass> favoriteList;
-    ArrayList<ChildModelClass> recentlyWatchedList;
-    ArrayList<ChildModelClass> latesList;
+    ArrayList<BookRecycleView> favoriteList;
+    ArrayList<BookRecycleView> recentlyWatchedList;
+    ArrayList<BookRecycleView> latesList;
 
-    ArrayList<ChildModelClass> comicList;
+    ArrayList<BookRecycleView> comicList;
 
-    ArrayList<ChildModelClass> mysteryList;
+    ArrayList<BookRecycleView> mysteryList;
 
-    ArrayList<ChildModelClass> horrorList;
+    ArrayList<BookRecycleView> horrorList;
     UserService userService;
 
     List<BookRecycleView> listBook;
     BottomNavigationView nav;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,12 +52,12 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
         userService = UserRepository.getUserService();
         recyclerView =findViewById(R.id.rcv_book);
         childModelClassArrayList = new ArrayList<>();
-        favoriteList= new ArrayList<>();
-        recentlyWatchedList= new ArrayList<>();
-        latesList = new ArrayList<>();
-        comicList = new ArrayList<>();
-        mysteryList = new ArrayList<>();
-        horrorList = new ArrayList<>();
+        favoriteList= new ArrayList<BookRecycleView>();
+        recentlyWatchedList= new ArrayList<BookRecycleView>();
+        latesList = new ArrayList<BookRecycleView>();
+        comicList = new ArrayList<BookRecycleView>();
+        mysteryList = new ArrayList<BookRecycleView>();
+        horrorList = new ArrayList<BookRecycleView>();
         parentModelClassArrayList = new ArrayList<>();
         //Bottom nevigation
         nav= findViewById(R.id.nav_bar);
@@ -86,7 +84,6 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         GetAll();
-
     }
 
     @Override
@@ -104,22 +101,22 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
                 for (BookRecycleView book : books) {
                         switch (book.getCategory_Id()) {
                             case "1":
-                                latesList.add(new ChildModelClass(book.getImage_URL(), book.getBook_Title(), book.getBook_Author()));
+                                latesList.add(book);
                                 break;
                             case "2":
-                                comicList.add(new ChildModelClass(book.getImage_URL(), book.getBook_Title(), book.getBook_Author()));
+                                comicList.add(book);
                                 break;
                             case "3":
-                                favoriteList.add(new ChildModelClass(book.getImage_URL(), book.getBook_Title(), book.getBook_Author()));
+                                favoriteList.add(book);
                                 break;
                             case "4":
-                                mysteryList.add(new ChildModelClass(book.getImage_URL(), book.getBook_Title(), book.getBook_Author()));
+                                mysteryList.add(book);
                                 break;
                             case "5":
-                                recentlyWatchedList.add(new ChildModelClass(book.getImage_URL(), book.getBook_Title(), book.getBook_Author()));
+                                recentlyWatchedList.add(book);
                                 break;
                             case "6":
-                                horrorList.add(new ChildModelClass(book.getImage_URL(), book.getBook_Title(), book.getBook_Author()));
+                                horrorList.add(book);
                                 break;
                         }
                     }

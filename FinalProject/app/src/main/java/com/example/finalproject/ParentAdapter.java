@@ -1,6 +1,8 @@
 package com.example.finalproject;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,10 +35,17 @@ public class ParentAdapter extends RecyclerView.Adapter<ParentAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ParentAdapter.ViewHolder holder, int position) {
         holder.tv_parent_title.setText(parentModelClassList.get(position).title);
         ChildAdapter childAdapter;
-        childAdapter = new ChildAdapter(parentModelClassList.get(position).childModelClassList,context);
+        childAdapter = new ChildAdapter(parentModelClassList.get(position).childList,context);
         holder.rv_child.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
         holder.rv_child.setAdapter(childAdapter);
         childAdapter.notifyDataSetChanged();
+        holder.tv_seeMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, SeeMorePage.class);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -47,11 +56,14 @@ public class ParentAdapter extends RecyclerView.Adapter<ParentAdapter.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder {
         RecyclerView rv_child;
         TextView tv_parent_title;
+        TextView tv_seeMore;
         public ViewHolder(@NonNull View itemView){
             super(itemView);
             rv_child=itemView.findViewById(R.id.rv_child);
 
             tv_parent_title =itemView.findViewById(R.id.textView_book);
+            tv_seeMore = itemView.findViewById(R.id.tvSeeMore);
+
         }
     }
 }
