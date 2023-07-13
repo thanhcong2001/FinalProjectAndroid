@@ -3,17 +3,17 @@ package com.example.finalproject;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.security.auth.callback.Callback;
-import javax.swing.text.View;
 
 import com.example.finalproject.Register.User;
 import com.example.finalproject.Register.UserRepository;
 import com.example.finalproject.api.UserService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainPage extends AppCompatActivity implements View.OnClickListener {

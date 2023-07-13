@@ -3,8 +3,6 @@ package com.example.finalproject;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.text.View;
-import javax.swing.text.html.ListView;
 
 import com.example.finalproject.Call.Call;
 import com.example.finalproject.Message.ChatActivity;
@@ -13,9 +11,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
