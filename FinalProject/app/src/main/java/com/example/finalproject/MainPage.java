@@ -70,7 +70,7 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.book) {
-                    startActivity(new Intent(MainPage.this, ListStore.class));
+//                    startActivity(new Intent(MainPage.this, ListStore.class));
                     return true;
                 } else if (item.getItemId() == R.id.setting) {
                     startActivity(new Intent(MainPage.this, Setting.class));
