@@ -38,7 +38,7 @@
             android:name=".Setting"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".GMap.GoogleMaps"
             android:exported="false" />
         <activity
             android:name=".GMap.DetailStore"
@@ -60,7 +60,7 @@
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".GMap.GoogleMaps"
+            android:name=".MainActivity"
             android:exported="true"
             >
             <intent-filter>
