@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -20,6 +21,7 @@ public class Call extends AppCompatActivity {
     private static final int REQUEST_CALL_PHONE = 1;
     private static final String PHONE_NUMBER = "0393103426";
 
+    ImageView backButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +33,14 @@ public class Call extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 makePhoneCall();
+            }
+        });
+        backButton = findViewById(R.id.btnBack); // Move this line inside onCreate()
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
     }

@@ -1,4 +1,4 @@
-package com.example.finalproject;
+package com.example.finalproject.GMap;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.finalproject.R;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

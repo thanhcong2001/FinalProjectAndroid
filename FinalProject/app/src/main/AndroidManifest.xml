@@ -38,16 +38,16 @@
             android:name=".Setting"
             android:exported="false" />
         <activity
-            android:name=".GoogleMaps"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".DetailStore"
+            android:name=".GMap.DetailStore"
             android:exported="false" />
         <activity
-            android:name=".ListStore"
+            android:name=".GMap.ListStore"
             android:exported="false" />
         <activity
-            android:name=".MapsActivity"
+            android:name=".GMap.MapsActivity"
             android:exported="false" />
         <activity
             android:name=".login.LoginPage"
@@ -60,7 +60,7 @@
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".MainActivity"
+            android:name=".GMap.GoogleMaps"
             android:exported="true"
             >
             <intent-filter>

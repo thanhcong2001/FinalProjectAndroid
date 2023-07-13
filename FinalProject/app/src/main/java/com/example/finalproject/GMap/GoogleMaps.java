@@ -1,4 +1,4 @@
-package com.example.finalproject;
+package com.example.finalproject.GMap;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
+import com.example.finalproject.MainPage;
+import com.example.finalproject.R;
+import com.example.finalproject.Setting;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;

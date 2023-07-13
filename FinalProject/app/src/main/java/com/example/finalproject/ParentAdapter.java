@@ -45,8 +45,8 @@ public class ParentAdapter extends RecyclerView.Adapter<ParentAdapter.ViewHolder
         holder.tv_seeMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, SeeMorePage.class);
-                context.startActivity(intent);
+//                Intent intent = new Intent(context, SeeMorePage.class);
+//                context.startActivity(intent);
             }
         });
     }

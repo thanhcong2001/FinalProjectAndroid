@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +25,7 @@ public class ChatActivity extends AppCompatActivity {
     private EditText messageEditText;
     private Button sendButton;
     private HashMap<String, String> keywordResponses = new HashMap<>();
+    ImageView backButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +60,15 @@ public class ChatActivity extends AppCompatActivity {
                     // Simulate a response from the store
                     simulateStoreResponse();
                 }
+            }
+        });
+
+        backButton = findViewById(R.id.btnBack); // Move this line inside onCreate()
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
     }

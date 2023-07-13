@@ -6,22 +6,41 @@
     android:layout_height="match_parent"
     android:background="@drawable/co2"
     tools:context=".Setting">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="#E7E7E7"
+        android:id="@+id/panel"
+        android:orientation="horizontal"
+        android:weightSum="16">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="127dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="143dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="140dp"
-        android:layout_marginBottom="641dp"
-        android:text="Setting"
-        android:textSize="30dp"
-        android:textStyle="bold"/>
+        <ImageView
+            android:id="@+id/btnBack"
+            android:src="@drawable/ic_back"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"/>
+
+        <TextView
+            android:id="@+id/txtPrice"
+            android:text="SETTING"
+            android:layout_gravity="center_vertical"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="11"
+            android:layout_height="wrap_content"/>
+
+        <FrameLayout
+            android:id="@+id/btnCart"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="match_parent"
+            android:layout_gravity="end">
+        </FrameLayout>
+    </LinearLayout>
 
     <ListView
         android:id="@+id/listView"

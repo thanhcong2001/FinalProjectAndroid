@@ -1,4 +1,4 @@
-package com.example.finalproject;
+package com.example.finalproject.GMap;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.example.finalproject.R;
 
 import java.text.DecimalFormat;
 
@@ -20,7 +21,7 @@ public class DetailStore extends AppCompatActivity {
 
     DecimalFormat formatter = new DecimalFormat("##,##");
 
-
+    ImageView backButton;
     private Button directionBtn;
 
     @Override
@@ -38,6 +39,14 @@ public class DetailStore extends AppCompatActivity {
                 intent.putExtra("latitude", item.getLatitude());
                 intent.putExtra("longitude", item.getLongtitude());
                 startActivity(intent);
+            }
+        });
+        backButton = findViewById(R.id.btnBack); // Move this line inside onCreate()
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
     }

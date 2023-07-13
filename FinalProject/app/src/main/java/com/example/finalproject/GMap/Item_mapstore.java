@@ -1,4 +1,4 @@
-package com.example.finalproject;
+package com.example.finalproject.GMap;
 
 import java.io.Serializable;
 
