@@ -15,8 +15,8 @@ public class ParentModelClass {
         return title;
     }
 
-    public List<ChildModelClass> getChildModelClassList() {
-        return childModelClassList;
+    public List<BookRecycleView> getChildModelClassList() {
+        return childList;
     }
 
 
