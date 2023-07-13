@@ -72,6 +72,9 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
                 if (item.getItemId() == R.id.book) {
                     startActivity(new Intent(MainPage.this, ListStore.class));
                     return true;
+                } else if (item.getItemId() == R.id.setting) {
+                    startActivity(new Intent(MainPage.this, Setting.class));
+                    return true;
                 }
                 return false;
             }
@@ -124,8 +127,8 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
             // Hide the "See more" TextView in all child items
             View childItem = recyclerView.getLayoutManager().findViewByPosition(0);
             if (childItem != null) {
-                TextView seeMoreTextView = childItem.findViewById(R.id.textView_book1);
-                seeMoreTextView.setVisibility(View.GONE);
+//                TextView seeMoreTextView = childItem.findViewById(R.id.textView_book1);
+//                seeMoreTextView.setVisibility(View.GONE);
             }
         }
     }
