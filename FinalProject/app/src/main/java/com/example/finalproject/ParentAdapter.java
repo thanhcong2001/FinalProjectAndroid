@@ -1,5 +1,6 @@
 package com.example.finalproject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,8 +47,12 @@ public class ParentAdapter extends RecyclerView.Adapter<ParentAdapter.ViewHolder
         holder.tv_seeMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(context, SeeMorePage.class);
-//                context.startActivity(intent);
+                // Put book list by category into bundle
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("listBookByCategory", (Serializable) parentModelClassList.get(position).getChildModelClassList());
+                Intent intent = new Intent(context, SeeMoreByCategoryPage.class);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
             }
         });
     }
