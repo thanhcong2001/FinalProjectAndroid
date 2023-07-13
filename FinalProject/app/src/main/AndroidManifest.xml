@@ -18,7 +18,7 @@
         android:theme="@style/Theme.FinalProject"
         tools:targetApi="31">
         <activity
-            android:name=".Setting"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".DetailStore"
@@ -40,7 +40,7 @@
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Setting"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
