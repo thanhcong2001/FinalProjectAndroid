@@ -22,4 +22,7 @@ public interface UserService {
 
     @GET("api/book/getBookDetail")
     Call<BookRecycleView> getBookDetail(@Query("bookId") String bookId);
+    
+    @GET("searchBooks")
+    Call<BookRecycleView[]> searchBooks(@Query("query") String query);
 }

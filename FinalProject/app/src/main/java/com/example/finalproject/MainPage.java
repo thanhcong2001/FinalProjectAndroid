@@ -1,13 +1,5 @@
 package com.example.finalproject;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
-import com.example.finalproject.Register.User;
-import com.example.finalproject.Register.UserRepository;
-import com.example.finalproject.api.UserService;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -15,17 +7,31 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.finalproject.Register.User;
+import com.example.finalproject.Register.UserRepository;
+import com.example.finalproject.api.UserService;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainPage extends AppCompatActivity implements View.OnClickListener {
+    private EditText editTextSearch;
+    private AppCompatButton buttonSearch;
      RecyclerView recyclerView;
      GridLayoutManager gridLayoutManager;
      User user;
@@ -48,6 +54,8 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
         userService = UserRepository.getUserService();
@@ -60,6 +68,9 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
         mysteryList = new ArrayList<BookRecycleView>();
         horrorList = new ArrayList<BookRecycleView>();
         parentModelClassArrayList = new ArrayList<>();
+        editTextSearch = findViewById(R.id.editTextText);
+        buttonSearch = findViewById(R.id.buttonSearch);
+        buttonSearch.setOnClickListener(this);
         //Bottom nevigation
         nav= findViewById(R.id.nav_bar);
         nav.setSelectedItemId(R.id.home);
@@ -90,7 +101,48 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
+        if (v.getId() == R.id.buttonSearch) {
+            String searchText = editTextSearch.getText().toString().trim();
+            performSearch(searchText);
+        }
     }
+    private void performSearch(String searchText) {
+        if (searchText.isEmpty()) {
+            // Clear the search results and show the original list of products
+            ParentAdapter parentAdapter = new ParentAdapter(parentModelClassArrayList, MainPage.this);
+            recyclerView.setAdapter(parentAdapter);
+        } else {
+            ArrayList<BookRecycleView> searchResults = new ArrayList<>();
+            for (ParentModelClass parentModel : parentModelClassArrayList) {
+                for (BookRecycleView childModel : parentModel.getChildModelClassList()) {
+                    if (childModel.getBook_Title().toLowerCase().contains(searchText.toLowerCase())) {
+                        searchResults.add(childModel);
+                    }
+                }
+            }
+
+            ArrayList<ParentModelClass> updatedList = new ArrayList<>();
+            if (!searchResults.isEmpty()) {
+                // Add the "Search Results" category only if there are matching results
+                ParentModelClass searchParentModel = new ParentModelClass("Search Results", searchResults);
+                updatedList.add(searchParentModel);
+            }
+
+            // Update the RecyclerView with the search results
+            ParentAdapter parentAdapter = new ParentAdapter(updatedList, MainPage.this);
+            recyclerView.setAdapter(parentAdapter);
+
+            // Hide the "See more" TextView in all child items
+            View childItem = recyclerView.getLayoutManager().findViewByPosition(0);
+            if (childItem != null) {
+//                TextView seeMoreTextView = childItem.findViewById(R.id.textView_book1);
+//                seeMoreTextView.setVisibility(View.GONE);
+            }
+        }
+    }
+
+
+
     public void GetAll(){
         Call<BookRecycleView[]> call = (Call<BookRecycleView[]>) userService.getAllBook();
         call.enqueue(new Callback<BookRecycleView[]>() {
@@ -140,4 +192,3 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
         });
     }
 }
-

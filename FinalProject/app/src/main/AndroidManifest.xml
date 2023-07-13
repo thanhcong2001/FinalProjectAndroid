@@ -41,6 +41,15 @@
             android:name=".GoogleMaps"
             android:exported="false" />
         <activity
+            android:name=".DetailStore"
+            android:exported="false" />
+        <activity
+            android:name=".ListStore"
+            android:exported="false" />
+        <activity
+            android:name=".MapsActivity"
+            android:exported="false" />
+        <activity
             android:name=".login.LoginPage"
             android:exported="false" />
         <activity

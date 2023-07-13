@@ -1,33 +1,36 @@
 package com.example.finalproject;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
+
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
-
 public class ParentAdapter extends RecyclerView.Adapter<ParentAdapter.ViewHolder> {
-    List<ParentModelClass> parentModelClassList;
-    Context context;
+    private List<ParentModelClass> parentModelClassList;
+    private List<ParentModelClass> originalParentModelClassList; // Store the original list for filtering
+    private Context context;
+
 
     public ParentAdapter(List<ParentModelClass> parentModelClassList, Context context) {
         this.parentModelClassList = parentModelClassList;
+        this.originalParentModelClassList = new ArrayList<>(parentModelClassList);
         this.context = context;
     }
 
     @NonNull
     @Override
-    public ParentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_book,null,false);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.item_book, parent, false);
         return new ViewHolder(view);
     }
 
@@ -60,10 +63,13 @@ public class ParentAdapter extends RecyclerView.Adapter<ParentAdapter.ViewHolder
         public ViewHolder(@NonNull View itemView){
             super(itemView);
             rv_child=itemView.findViewById(R.id.rv_child);
-
             tv_parent_title =itemView.findViewById(R.id.textView_book);
             tv_seeMore = itemView.findViewById(R.id.tvSeeMore);
 
         }
     }
+
 }
+
+
+

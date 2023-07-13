@@ -1,8 +1,4 @@
 package com.example.finalproject.login;
-
-
-
-
 import com.example.finalproject.MainPage;
 import com.example.finalproject.R;
 import com.example.finalproject.Register.SignUp;
@@ -33,8 +29,6 @@ public class LoginPage extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login_page);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         username = findViewById(R.id.editTextTextEmailAddress2);
         password = findViewById(R.id.editTextTextPassword);
         btn = findViewById(R.id.button1);

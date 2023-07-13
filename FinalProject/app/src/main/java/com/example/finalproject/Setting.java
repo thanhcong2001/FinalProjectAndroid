@@ -27,7 +27,7 @@ public class Setting extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         List<String> list = new ArrayList<>();
-        list.add("About Us");
+        list.add("List of Stores");
         list.add("Contact With Us");
         list.add("Chat With Us");
         list.add("Store's Location");
@@ -63,6 +63,11 @@ public class Setting extends AppCompatActivity {
                     Intent intent = new Intent(Setting.this, Call.class);
                     startActivity(intent);
                 }
+                else if(position==0){
+                    Intent intent = new Intent(Setting.this,ListStore.class);
+                    startActivity(intent);
+                }
+        
             }
         });
 
