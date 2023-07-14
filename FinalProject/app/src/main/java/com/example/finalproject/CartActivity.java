@@ -1,9 +1,12 @@
 package com.example.finalproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,7 +26,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Calendar;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CartActivity extends AppCompatActivity {
 
@@ -33,6 +41,7 @@ public class CartActivity extends AppCompatActivity {
     private ImageView btnBack;
     private TextView subTotal, shipping, totalPrice;
     private CartModel cartModel;
+    private Button btnCheckOut;
     String URL = "https://regres.in/api/users?page=1";
 
     @Override
@@ -68,6 +77,7 @@ public class CartActivity extends AppCompatActivity {
         shipping = findViewById(R.id.shipping);
         totalPrice = findViewById(R.id.total_price);
         btnBack = findViewById(R.id.btnBack);
+        btnCheckOut = findViewById(R.id.btn_checkout);
         btnBack.setOnClickListener(v -> finish());
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerCart.setLayoutManager(layoutManager);
@@ -89,6 +99,13 @@ public class CartActivity extends AppCompatActivity {
             totalPrice.setText("$" + "0");
         }
 
+        btnCheckOut.setOnClickListener(v -> {
+//            boolean flag = saveOrderToDatabase();
+//            if(flag) {
+//
+//                startActivity(new Intent(CartActivity.this, BillActivity.class));
+//            }
+        });
     }
 
     private void loadJSONFromInternalData(){
@@ -115,4 +132,58 @@ public class CartActivity extends AppCompatActivity {
             ex.printStackTrace();
         }
     }
+
+//    private boolean saveOrderToDatabase(){
+//        boolean flag = false;
+//        Order order = new Order();
+//        order.setUser_Id(cartModel.getUserID());
+//        order.setOrder_Customer_Name("");
+//        order.setOrder_Customer_Address("");
+//        order.setOrder_Customer_Phone("");
+//        order.setOrder_Date(Calendar.getInstance().getTime());
+//        order.setOrder_Quantity(cartModel.getTotalNumber());
+//        order.setOrder_Amount(cartModel.getTotalPrice());
+//        List<CartItemModel> items = cartModel.getItemModels();
+//        try {
+//            Call<Order> call = orderService.createOrder(order);
+//            call.enqueue(new Callback<Order>() {
+//                @Override
+//                public void onResponse(Call<Order> call, Response<Order> response) {
+//                    if (response.body() != null) {
+//                        for (CartItemModel item: items) {
+//                            OrderDetail orderDetail = new OrderDetail();
+//                            orderDetail.setOrder_Id(response.body().getOrder_Id());
+//                            orderDetail.setBook_Id(item.getId());
+//                            int number = item.getNumber();
+//                            double price = item.getPrice();
+//                            orderDetail.setOrder_Detail_Quantity(number);
+//                            orderDetail.setOrder_Detail_Amount(price * number);
+//                            orderDetail.setOrder_Detail_Price(price);
+//                            Call<OrderDetail> call1 = orderService.createOrderDetail(orderDetail);
+//                            call1.enqueue(new Callback<OrderDetail>() {
+//                                @Override
+//                                public void onResponse(Call<OrderDetail> call, Response<OrderDetail> response) {
+//
+//                                }
+//
+//                                @Override
+//                                public void onFailure(Call<OrderDetail> call, Throwable t) {
+//
+//                                }
+//                            });
+//                        }
+//                        Toast.makeText(CartActivity.this, "Save successfully", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//                @Override
+//                public void onFailure(Call<Order> call, Throwable t) {
+//                    Toast.makeText(CartActivity.this, "Save Failed", Toast.LENGTH_SHORT).show();
+//                }
+//            });
+//            return true;
+//        } catch (Exception e) {
+//            Log.d("Loi", e.getMessage());
+//        }
+//        return false;
+//    }
 }
