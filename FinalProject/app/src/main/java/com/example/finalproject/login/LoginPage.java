@@ -2,6 +2,7 @@ package com.example.finalproject.login;
 import com.example.finalproject.MainPage;
 import com.example.finalproject.R;
 import com.example.finalproject.Register.SignUp;
+import com.example.finalproject.Register.User;
 import com.example.finalproject.api.ApiClient;
 
 import android.content.Intent;
@@ -58,6 +59,9 @@ public class LoginPage extends AppCompatActivity {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.isSuccessful()) {
                     Intent intentLogin = new Intent(LoginPage.this, MainPage.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("name",response.body().getUser_Name());
+                    intentLogin.putExtras(bundle);
                     startActivity(intentLogin);
                     LoginResponse loginResponse = response.body();
                     new Handler().postDelayed(new Runnable() {

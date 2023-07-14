@@ -41,6 +41,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -130,11 +131,14 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
         });
         //Get userName to display
         String data = "";
-        if (getIntent() != null) {
+        /*if (getIntent() != null) {
             data = getIntent().getStringExtra("name");
-        }
+        }*/
+        Bundle bundle = getIntent().getExtras();
         TextView textView = findViewById(R.id.textView7);
-        textView.setText("Hello "+ data);
+        String name = (String) bundle.get("name");
+        name.toUpperCase(Locale.ROOT);
+        textView.setText("Hello "+ name);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         GetAll();
