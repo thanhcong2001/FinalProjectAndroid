@@ -2,8 +2,10 @@ package com.example.finalproject;
 
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -20,8 +22,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.finalproject.Register.User;
 import com.example.finalproject.Register.UserRepository;
 import com.example.finalproject.api.UserService;
+import com.example.finalproject.eventbus.MyUpdateCartEvent;
+import com.example.finalproject.model.CartItemModel;
+import com.example.finalproject.model.CartModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
+import com.nex3z.notificationbadge.NotificationBadge;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONArray;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +69,27 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
     List<BookRecycleView> listBook;
     BottomNavigationView nav;
     @SuppressLint("MissingInflatedId")
+    private NotificationBadge badge;
+
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        EventBus.getDefault().register(this);
+//        countCartItem();
+//    }
+//
+//    @Override
+//    protected void onStop() {
+//        if(EventBus.getDefault().hasSubscriberForEvent(MyUpdateCartEvent.class))
+//            EventBus.getDefault().removeStickyEvent(MyUpdateCartEvent.class);
+//        EventBus.getDefault().unregister(this);
+//        super.onStop();
+//    }
+//
+//    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+//    public void onUpdateCart(MyUpdateCartEvent event){
+//        countCartItem();
+//    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -83,6 +121,9 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
                 } else if (item.getItemId()==R.id.setting) {
                     startActivity(new Intent(MainPage.this, Setting.class));
                     return true;
+                }else if (item.getItemId() == R.id.cart){
+                    startActivity(new Intent(MainPage.this, CartActivity.class));
+                    return true;
                 }
                 return false;
             }
@@ -97,6 +138,7 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         GetAll();
+        addFakeToCart(1);
     }
 
     @Override
@@ -190,5 +232,61 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
 
             }
         });
+    }
+
+    private void countCartItem() {
+        try {
+            File file = new File(getApplicationContext().getFilesDir(), "cart.json");
+            if (!file.exists()){
+                badge.setNumber(0);
+            }else {
+                int total = 0;
+                InputStream is = getApplicationContext().openFileInput("cart.json");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+                StringBuilder stringBuilder = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
+                String jsonContent = stringBuilder.toString();
+                if (!jsonContent.isEmpty()) {
+                    Gson gson = new Gson();
+                    CartModel cartModel = gson.fromJson(jsonContent, CartModel.class);
+                    badge.setNumber(cartModel.getTotalNumber());
+                } else {
+                    badge.setNumber(0);
+                }
+
+                is.close();
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void addFakeToCart(int userID) {
+        JSONArray jsonArray;
+        Gson gson = new Gson();
+        try {
+            File file = new File(getApplicationContext().getFilesDir(), "cart.json");
+            if (!file.exists()){
+                file.createNewFile();
+                List<CartItemModel> cartItems = new ArrayList<>();
+                cartItems.add(new CartItemModel(1, 1,
+                        "abc", R.drawable.book1, 10.99));
+                cartItems.add(new CartItemModel(2, 1,
+                        "xyz", R.drawable.book3, 20.99));
+                CartModel cartModel = new CartModel(userID, cartItems);
+                String cartModelJson = gson.toJson(cartModel);
+                OutputStream os = getApplicationContext().openFileOutput("cart.json", Context.MODE_PRIVATE);
+                os.write(cartModelJson.getBytes());
+                os.close();
+                Log.d("CartModel Data", cartModelJson);
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }

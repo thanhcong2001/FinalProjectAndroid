@@ -54,6 +54,12 @@
             android:name=".GMap.MapsActivity"
             android:exported="false" />
         <activity
+            android:name=".CartActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GoogleMaps"
+            android:exported="false" />
+        <activity
             android:name=".login.LoginPage"
             android:exported="false" />
         <activity
