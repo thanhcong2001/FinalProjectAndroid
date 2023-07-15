@@ -9,7 +9,9 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.finalproject.adapter.BillAdapter;
 import com.example.finalproject.adapter.CartAdapter;
+import com.example.finalproject.login.LoginResponse;
 import com.example.finalproject.model.CartItemModel;
 import com.example.finalproject.model.CartModel;
 import com.google.gson.Gson;
@@ -45,18 +47,46 @@ public class BillActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerProducts.setLayoutManager(layoutManager);
 
+        loadUserFromInternalData();
         loadJSONFromInternalData();
 
         if(cartModel != null) {
             items = cartModel.getItemModels();
-            subTotal.setText("$" + Double.toString(cartModel.getTotalPrice()));
-            shipping.setText("$" + "5");
-            double total = cartModel.getTotalPrice() + 5;
+            subTotal.setText(Double.toString(cartModel.getTotalPrice())  + "đ");
+            shipping.setText("30000"  + "đ");
+            double total = cartModel.getTotalPrice() + 30000;
             totalPrice.setText("$" + Double.toString(total));
 
-            CartAdapter adapter = new CartAdapter(BillActivity.this, cartModel);
+            BillAdapter adapter = new BillAdapter(BillActivity.this, cartModel);
             recyclerProducts.setAdapter(adapter);
             getApplicationContext().deleteFile("cart.json");
+        }
+    }
+
+    private void loadUserFromInternalData(){
+        try {
+            File file = new File(getApplicationContext().getFilesDir(), "userData.json");
+            if (file.exists()) {
+                InputStream is = getApplicationContext().openFileInput("userData.json");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+                StringBuilder stringBuilder = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
+                String jsonContent = stringBuilder.toString();
+                if (!jsonContent.isEmpty()) {
+                    Gson gson = new Gson();
+                    LoginResponse loginResponse = gson.fromJson(jsonContent, LoginResponse.class);
+                    name.setText(loginResponse.getUser_Name());
+                    address.setText(loginResponse.getUser_Address());
+                    phone.setText(loginResponse.getUser_Phone());
+                    Log.d("User Data", jsonContent);
+                }
+                is.close();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 

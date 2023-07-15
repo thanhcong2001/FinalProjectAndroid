@@ -3,10 +3,13 @@ import com.example.finalproject.MainPage;
 import com.example.finalproject.R;
 import com.example.finalproject.Register.SignUp;
 import com.example.finalproject.api.ApiClient;
+import com.google.gson.Gson;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -14,6 +17,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.File;
+import java.io.OutputStream;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -60,6 +67,7 @@ public class LoginPage extends AppCompatActivity {
                     Intent intentLogin = new Intent(LoginPage.this, MainPage.class);
                     startActivity(intentLogin);
                     LoginResponse loginResponse = response.body();
+                    saveUserData(loginResponse);
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -75,5 +83,23 @@ public class LoginPage extends AppCompatActivity {
                 Toast.makeText(LoginPage.this, "Throwable " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void saveUserData(LoginResponse loginResponse){
+        try {
+            File file = new File(getApplicationContext().getFilesDir(), "userData.json");
+            if (file.exists()) {
+                file.delete();
+            }
+            file.createNewFile();
+            Gson gson = new Gson();
+            String userData = gson.toJson(loginResponse);
+            OutputStream os = getApplicationContext().openFileOutput("userData.json", Context.MODE_PRIVATE);
+            os.write(userData.getBytes());
+            os.close();
+            Log.d("User Data", userData);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

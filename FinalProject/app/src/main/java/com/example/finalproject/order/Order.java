@@ -1,6 +1,5 @@
 package com.example.finalproject.order;
 
-import java.util.Date;
 
 public class Order {
     private String order_Id;
@@ -8,15 +7,15 @@ public class Order {
     private String order_Customer_Name;
     private String order_Customer_Address;
     private String order_Customer_Phone;
-    private Date order_Date;
+    private String order_Date;
     private int order_Quantity;
-    private double order_Amount;
-    private boolean is_Order_Status;
+    private float order_Amount;
+    private int is_Order_Status;
 
     public Order() {
     }
 
-    public Order(String order_Id, String user_Id, String order_Customer_Name, String order_Customer_Address, String order_Customer_Phone, Date order_Date, int order_Quantity, double order_Amount, boolean is_Order_Status) {
+    public Order(String order_Id, String user_Id, String order_Customer_Name, String order_Customer_Address, String order_Customer_Phone, String order_Date, int order_Quantity, float order_Amount, int is_Order_Status) {
         this.order_Id = order_Id;
         this.user_Id = user_Id;
         this.order_Customer_Name = order_Customer_Name;
@@ -68,11 +67,11 @@ public class Order {
         this.order_Customer_Phone = order_Customer_Phone;
     }
 
-    public Date getOrder_Date() {
+    public String getOrder_Date() {
         return order_Date;
     }
 
-    public void setOrder_Date(Date order_Date) {
+    public void setOrder_Date(String order_Date) {
         this.order_Date = order_Date;
     }
 
@@ -84,19 +83,19 @@ public class Order {
         this.order_Quantity = order_Quantity;
     }
 
-    public double getOrder_Amount() {
+    public float getOrder_Amount() {
         return order_Amount;
     }
 
-    public void setOrder_Amount(double order_Amount) {
+    public void setOrder_Amount(float order_Amount) {
         this.order_Amount = order_Amount;
     }
 
-    public boolean isIs_Order_Status() {
+    public int isIs_Order_Status() {
         return is_Order_Status;
     }
 
-    public void setIs_Order_Status(boolean is_Order_Status) {
+    public void setIs_Order_Status(int is_Order_Status) {
         this.is_Order_Status = is_Order_Status;
     }
 }

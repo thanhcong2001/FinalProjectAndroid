@@ -138,7 +138,6 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         GetAll();
-        addFakeToCart(1);
     }
 
     @Override
@@ -265,28 +264,5 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
         }
     }
 
-    private void addFakeToCart(int userID) {
-        JSONArray jsonArray;
-        Gson gson = new Gson();
-        try {
-            File file = new File(getApplicationContext().getFilesDir(), "cart.json");
-            if (!file.exists()){
-                file.createNewFile();
-                List<CartItemModel> cartItems = new ArrayList<>();
-                cartItems.add(new CartItemModel(1, 1,
-                        "abc", R.drawable.book1, 10.99));
-                cartItems.add(new CartItemModel(2, 1,
-                        "xyz", R.drawable.book3, 20.99));
-                CartModel cartModel = new CartModel(userID, cartItems);
-                String cartModelJson = gson.toJson(cartModel);
-                OutputStream os = getApplicationContext().openFileOutput("cart.json", Context.MODE_PRIVATE);
-                os.write(cartModelJson.getBytes());
-                os.close();
-                Log.d("CartModel Data", cartModelJson);
-            }
 
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
 }

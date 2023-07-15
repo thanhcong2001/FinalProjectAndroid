@@ -53,7 +53,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder>{
                 .load(item.getCover())
                 .into(holder.itemCoverView);
         holder.itemNameView.setText(item.getName());
-        holder.itemPriceView.setText("$" + Double.toString(item.getPrice()));
+        holder.itemPriceView.setText(Double.toString(item.getPrice()) + "đ");
         holder.itemNumberView.setText(Integer.toString(item.getNumber()));
         holder.itemMinus.setOnClickListener(v ->{
             minusCartItem(holder, item, position);
