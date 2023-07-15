@@ -131,7 +131,6 @@ public class CartActivity extends AppCompatActivity {
                 if (!jsonContent.isEmpty()) {
                     Gson gson = new Gson();
                     cartModel = gson.fromJson(jsonContent, CartModel.class);
-                    Log.d("CartModel Data", jsonContent);
                 }
                 is.close();
             }
@@ -157,14 +156,12 @@ public class CartActivity extends AppCompatActivity {
                 if (!jsonContent.isEmpty()) {
                     Gson gson = new Gson();
                     LoginResponse loginResponse = gson.fromJson(jsonContent, LoginResponse.class);
-                    Log.d("User Data", jsonContent);
                     order.setUser_Id(loginResponse.getUser_Id());
                     order.setOrder_Customer_Name(loginResponse.getUser_Name());
                     order.setOrder_Customer_Address(loginResponse.getUser_Address());
                     order.setOrder_Customer_Phone(loginResponse.getUser_Phone());
                     Timestamp time = new Timestamp(System.currentTimeMillis());
                     String time2 = time.toString().replace(" ", "T");
-                    Log.d("Current time", time2);
                     order.setOrder_Date(time2);
                     order.setOrder_Quantity(cartModel.getTotalNumber());
                     order.setOrder_Amount(cartModel.getTotalPrice() + 30000);

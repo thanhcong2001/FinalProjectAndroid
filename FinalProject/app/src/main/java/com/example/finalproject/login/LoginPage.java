@@ -97,7 +97,6 @@ public class LoginPage extends AppCompatActivity {
             OutputStream os = getApplicationContext().openFileOutput("userData.json", Context.MODE_PRIVATE);
             os.write(userData.getBytes());
             os.close();
-            Log.d("User Data", userData);
         }catch (Exception e){
             e.printStackTrace();
         }

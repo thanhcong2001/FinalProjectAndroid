@@ -81,7 +81,6 @@ public class BillActivity extends AppCompatActivity {
                     name.setText(loginResponse.getUser_Name());
                     address.setText(loginResponse.getUser_Address());
                     phone.setText(loginResponse.getUser_Phone());
-                    Log.d("User Data", jsonContent);
                 }
                 is.close();
             }
@@ -105,7 +104,6 @@ public class BillActivity extends AppCompatActivity {
                 if (!jsonContent.isEmpty()) {
                     Gson gson = new Gson();
                     cartModel = gson.fromJson(jsonContent, CartModel.class);
-                    Log.d("CartModel Data", jsonContent);
                 }
                 is.close();
             }

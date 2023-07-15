@@ -121,7 +121,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder>{
             OutputStream os = context.openFileOutput("cart.json", Context.MODE_PRIVATE);
             os.write(cartModelJson.getBytes());
             os.close();
-            Log.d("CartModel Data", cartModelJson);
             EventBus.getDefault().postSticky(new MyUpdateCartEvent());
         } catch (Exception ex) {
             ex.printStackTrace();

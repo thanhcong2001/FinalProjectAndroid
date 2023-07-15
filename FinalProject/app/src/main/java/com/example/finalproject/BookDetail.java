@@ -90,7 +90,6 @@ public class BookDetail extends AppCompatActivity  {
                 OutputStream os = getApplicationContext().openFileOutput("cart.json", Context.MODE_PRIVATE);
                 os.write(cartModelJson.getBytes());
                 os.close();
-                Log.d("CartModel Data", cartModelJson);
                 Toast.makeText(BookDetail.this, "Add successfully", Toast.LENGTH_SHORT).show();
             }else {
                 InputStream is = getApplicationContext().openFileInput("cart.json");
@@ -112,9 +111,8 @@ public class BookDetail extends AppCompatActivity  {
                         os.write(cartModelJson.getBytes());
                         os.close();
                         Toast.makeText(BookDetail.this, "Add successfully", Toast.LENGTH_SHORT).show();
-                        Log.d("CartModel Data", cartModelJson);
                     }else{
-                        Toast.makeText(BookDetail.this, "this is already in cart", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(BookDetail.this, "This is already in cart", Toast.LENGTH_SHORT).show();
                     }
                 }
 
