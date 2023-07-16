@@ -66,9 +66,6 @@ public class LoginPage extends AppCompatActivity {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.isSuccessful()) {
                     Intent intentLogin = new Intent(LoginPage.this, MainPage.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("name",response.body().getUser_Name());
-                    intentLogin.putExtras(bundle);
                     startActivity(intentLogin);
                     LoginResponse loginResponse = response.body();
                     saveUserData(loginResponse);
