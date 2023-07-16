@@ -50,6 +50,10 @@ public class SeeMorePage extends AppCompatActivity {
                     startActivity(new Intent(SeeMorePage.this, Setting.class));
                     return true;
                 }
+                else if (item.getItemId()==R.id.cart) {
+                    startActivity(new Intent(SeeMorePage.this, CartActivity.class));
+                    return true;
+                }
                 return false;
             }
         });

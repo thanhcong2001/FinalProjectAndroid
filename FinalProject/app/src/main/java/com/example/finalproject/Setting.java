@@ -63,6 +63,10 @@ public class Setting extends AppCompatActivity {
                     startActivity(new Intent(Setting.this, SeeMorePage.class));
                     return true;
                 }
+                else if (item.getItemId()==R.id.cart) {
+                    startActivity(new Intent(Setting.this, CartActivity.class));
+                    return true;
+                }
                 return false;
             }
         });
