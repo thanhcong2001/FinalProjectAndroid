@@ -11,7 +11,7 @@ public class BookRecycleView implements Serializable {
     private String book_Title;
     private String book_Author;
     private String book_Description;
-    private int book_Price;
+    private float book_Price;
     private int book_Quantity;
     private int book_Year_Public;
     private int book_ISBN;
@@ -84,11 +84,11 @@ public class BookRecycleView implements Serializable {
         this.book_Description = book_Description;
     }
 
-    public int getBook_Price() {
+    public float getBook_Price() {
         return book_Price;
     }
 
-    public void setBook_Price(int book_Price) {
+    public void setBook_Price(float book_Price) {
         this.book_Price = book_Price;
     }
 

@@ -54,6 +54,9 @@
             android:name=".GMap.MapsActivity"
             android:exported="false" />
         <activity
+            android:name=".BillActivity"
+            android:exported="false" />
+        <activity
             android:name=".CartActivity"
             android:exported="false" />
         <activity

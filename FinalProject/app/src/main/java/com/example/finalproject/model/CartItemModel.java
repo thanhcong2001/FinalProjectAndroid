@@ -1,18 +1,13 @@
 package com.example.finalproject.model;
 
 public class CartItemModel {
-    private int id;
+    private String id;
     private int number;
     private String name;
-    private int cover;
+    private String cover;
     private double price;
 
-    public CartItemModel(int id, int number) {
-        this.id = id;
-        this.number = number;
-    }
-
-    public CartItemModel(int id, int number, String name, int cover, double price) {
+    public CartItemModel(String id, int number, String name, String cover, double price) {
         this.id = id;
         this.number = number;
         this.name = name;
@@ -20,11 +15,11 @@ public class CartItemModel {
         this.price = price;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -40,7 +35,7 @@ public class CartItemModel {
         return name;
     }
 
-    public int getCover() {
+    public String getCover() {
         return cover;
     }
 
