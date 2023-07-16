@@ -109,10 +109,15 @@ public class CartActivity extends AppCompatActivity {
         }
 
         btnCheckOut.setOnClickListener(v -> {
+            if(cartModel==null){
+                Toast.makeText(CartActivity.this, "Add unsuccessfully", Toast.LENGTH_SHORT).show();
+            }
+            else{
             saveOrderToDatabase();
             EventBus.getDefault().postSticky(new MyUpdateCartEvent());
             startActivity(new Intent(CartActivity.this, BillActivity.class));
             finish();
+            }
         });
     }
 
