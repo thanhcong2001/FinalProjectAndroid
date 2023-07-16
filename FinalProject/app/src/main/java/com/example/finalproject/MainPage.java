@@ -2,10 +2,8 @@ package com.example.finalproject;
 
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -22,25 +20,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.finalproject.Register.User;
 import com.example.finalproject.Register.UserRepository;
 import com.example.finalproject.api.UserService;
-import com.example.finalproject.eventbus.MyUpdateCartEvent;
-import com.example.finalproject.model.CartItemModel;
 import com.example.finalproject.model.CartModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
-import com.nex3z.notificationbadge.NotificationBadge;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-import org.json.JSONArray;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -69,7 +59,7 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
     List<BookRecycleView> listBook;
     BottomNavigationView nav;
     @SuppressLint("MissingInflatedId")
-    private NotificationBadge badge;
+//    private NotificationBadge badge;
 
 //    @Override
 //    protected void onStart() {
@@ -130,11 +120,6 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
         });
         //Get userName to display
         String data = "";
-        if (getIntent() != null) {
-            data = getIntent().getStringExtra("name");
-        }
-        TextView textView = findViewById(R.id.textView7);
-        textView.setText("Hello "+ data);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         GetAll();
@@ -233,36 +218,36 @@ public class MainPage extends AppCompatActivity implements View.OnClickListener 
         });
     }
 
-    private void countCartItem() {
-        try {
-            File file = new File(getApplicationContext().getFilesDir(), "cart.json");
-            if (!file.exists()){
-                badge.setNumber(0);
-            }else {
-                int total = 0;
-                InputStream is = getApplicationContext().openFileInput("cart.json");
-                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-                StringBuilder stringBuilder = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    stringBuilder.append(line);
-                }
-                String jsonContent = stringBuilder.toString();
-                if (!jsonContent.isEmpty()) {
-                    Gson gson = new Gson();
-                    CartModel cartModel = gson.fromJson(jsonContent, CartModel.class);
-                    badge.setNumber(cartModel.getTotalNumber());
-                } else {
-                    badge.setNumber(0);
-                }
-
-                is.close();
-            }
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
+//    private void countCartItem() {
+//        try {
+//            File file = new File(getApplicationContext().getFilesDir(), "cart.json");
+//            if (!file.exists()){
+//                badge.setNumber(0);
+//            }else {
+//                int total = 0;
+//                InputStream is = getApplicationContext().openFileInput("cart.json");
+//                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+//                StringBuilder stringBuilder = new StringBuilder();
+//                String line;
+//                while ((line = reader.readLine()) != null) {
+//                    stringBuilder.append(line);
+//                }
+//                String jsonContent = stringBuilder.toString();
+//                if (!jsonContent.isEmpty()) {
+//                    Gson gson = new Gson();
+//                    CartModel cartModel = gson.fromJson(jsonContent, CartModel.class);
+//                    badge.setNumber(cartModel.getTotalNumber());
+//                } else {
+//                    badge.setNumber(0);
+//                }
+//
+//                is.close();
+//            }
+//
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//    }
 
 
 }
